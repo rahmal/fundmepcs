@@ -1,0 +1,25 @@
+common: &common
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  host: localhost
+  username: root
+  username: root
+  password:
+
+development:
+  <<: *common
+  database: fundme-dev
+
+profile:
+  <<: *common
+  database: grh-dev
+
+test:
+  <<: *common
+  database: fundme-test
+
+production:
+  <<: *common
+  database: fundme
+  socket: /var/run/mysqld/mysqld.sock
