@@ -1,281 +1,284 @@
+-- MySQL dump 10.13  Distrib 5.6.22, for osx10.10 (x86_64)
 --
--- PostgreSQL database dump
---
+-- Host: localhost    Database: fundme-dev
+-- ------------------------------------------------------
+-- Server version	5.6.22
 
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
-SET search_path = public, pg_catalog;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Name: authentications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Table structure for table `authentications`
 --
 
-CREATE TABLE authentications (
-    id integer NOT NULL,
-    user_id integer,
-    provider character varying(255) NOT NULL,
-    proid character varying(255) NOT NULL,
-    token character varying(255),
-    refresh_token character varying(255),
-    secret character varying(255),
-    expires_at timestamp without time zone,
-    username character varying(255),
-    image_url character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: authentications_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE authentications_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
+DROP TABLE IF EXISTS `authentications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `authentications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `provider` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `proid` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `refresh_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `secret` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_authentications_on_provider` (`provider`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: authentications_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Table structure for table `campaigns`
 --
 
-ALTER SEQUENCE authentications_id_seq OWNED BY authentications.id;
-
-
---
--- Name: oauth_caches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE oauth_caches (
-    authentication_id integer NOT NULL,
-    data_json text NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: rails_admin_histories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE rails_admin_histories (
-    id integer NOT NULL,
-    message text,
-    username character varying(255),
-    item integer,
-    "table" character varying(255),
-    month smallint,
-    year bigint,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
+DROP TABLE IF EXISTS `campaigns`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `campaigns` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `amount_needed_cents` int(11) NOT NULL DEFAULT '0',
+  `amount_raised_cents` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_campaigns_on_user_id` (`user_id`),
+  KEY `index_campaigns_on_product_id` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: rails_admin_histories_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Table structure for table `donations`
 --
 
-CREATE SEQUENCE rails_admin_histories_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: rails_admin_histories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE rails_admin_histories_id_seq OWNED BY rails_admin_histories.id;
-
-
---
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE schema_migrations (
-    version character varying(255) NOT NULL
-);
-
+DROP TABLE IF EXISTS `donations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `donations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `donor_id` int(11) DEFAULT NULL,
+  `campaign_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `amount_given_cents` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_donations_on_user_id` (`user_id`),
+  KEY `index_donations_on_campaign_id` (`campaign_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Table structure for table `oauth_caches`
 --
 
-CREATE TABLE users (
-    id integer NOT NULL,
-    first_name character varying(255),
-    last_name character varying(255),
-    image_url character varying(255),
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying(255),
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255),
-    confirmation_token character varying(255),
-    confirmed_at timestamp without time zone,
-    confirmation_sent_at timestamp without time zone,
-    unconfirmed_email character varying(255),
-    failed_attempts integer DEFAULT 0 NOT NULL,
-    unlock_token character varying(255),
-    locked_at timestamp without time zone,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    is_admin boolean
-);
-
+DROP TABLE IF EXISTS `oauth_caches`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_caches` (
+  `authentication_id` int(11) NOT NULL,
+  `data_json` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Table structure for table `orders`
 --
 
-CREATE SEQUENCE users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE users_id_seq OWNED BY users.id;
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY authentications ALTER COLUMN id SET DEFAULT nextval('authentications_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY rails_admin_histories ALTER COLUMN id SET DEFAULT nextval('rails_admin_histories_id_seq'::regclass);
-
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orders` (
+  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `transaction_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address_one` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address_two` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `zip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `uuid` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `price` decimal(10,0) DEFAULT NULL,
+  `shipping` decimal(10,0) DEFAULT NULL,
+  `tracking_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `expiration` date DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Table structure for table `payment_options`
 --
 
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
-
-
---
--- Name: authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY authentications
-    ADD CONSTRAINT authentications_pkey PRIMARY KEY (id);
-
-
---
--- Name: rails_admin_histories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY rails_admin_histories
-    ADD CONSTRAINT rails_admin_histories_pkey PRIMARY KEY (id);
-
+DROP TABLE IF EXISTS `payment_options`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payment_options` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `amount` decimal(10,0) DEFAULT NULL,
+  `amount_display` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `shipping_desc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `delivery_desc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `limit` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Table structure for table `products`
 --
 
-ALTER TABLE ONLY users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: index_authentications_on_provider; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_authentications_on_provider ON authentications USING btree (provider);
-
-
---
--- Name: index_rails_admin_histories; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_rails_admin_histories ON rails_admin_histories USING btree (item, "table", month, year);
-
-
---
--- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (confirmation_token);
-
-
---
--- Name: index_users_on_lower_email_index; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_users_on_lower_email_index ON users USING btree (lower((email)::text));
-
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `brand` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `series` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `model` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `os` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `processor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `battery` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `memory` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `storage` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `screen` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `wifi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `weight` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dimensions` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `release_date` date DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cost_cents` int(11) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Table structure for table `rails_admin_histories`
 --
 
-CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
-
+DROP TABLE IF EXISTS `rails_admin_histories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rails_admin_histories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `message` text COLLATE utf8_unicode_ci,
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `item` int(11) DEFAULT NULL,
+  `table` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `month` smallint(6) DEFAULT NULL,
+  `year` bigint(20) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_rails_admin_histories` (`item`,`table`,`month`,`year`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Table structure for table `schema_migrations`
 --
 
-CREATE UNIQUE INDEX index_users_on_unlock_token ON users USING btree (unlock_token);
-
+DROP TABLE IF EXISTS `schema_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `unique_schema_migrations` (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Table structure for table `users`
 --
 
-CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `bio` text COLLATE utf8_unicode_ci,
+  `address` text COLLATE utf8_unicode_ci,
+  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gender` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `encrypted_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `reset_password_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reset_password_sent_at` datetime DEFAULT NULL,
+  `remember_created_at` datetime DEFAULT NULL,
+  `sign_in_count` int(11) NOT NULL DEFAULT '0',
+  `current_sign_in_at` datetime DEFAULT NULL,
+  `last_sign_in_at` datetime DEFAULT NULL,
+  `current_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `confirmation_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `confirmed_at` datetime DEFAULT NULL,
+  `confirmation_sent_at` datetime DEFAULT NULL,
+  `unconfirmed_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `failed_attempts` int(11) NOT NULL DEFAULT '0',
+  `unlock_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `locked_at` datetime DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `is_admin` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_users_on_email` (`email`),
+  UNIQUE KEY `index_users_on_username` (`username`),
+  UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`),
+  UNIQUE KEY `index_users_on_confirmation_token` (`confirmation_token`),
+  UNIQUE KEY `index_users_on_unlock_token` (`unlock_token`),
+  KEY `index_users_on_deleted_at` (`deleted_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
---
--- PostgreSQL database dump complete
---
-
-SET search_path TO "$user",public;
-
+-- Dump completed on 2015-02-21 20:45:16
 INSERT INTO schema_migrations (version) VALUES ('20130909170542');
 
 INSERT INTO schema_migrations (version) VALUES ('20130909194719');
@@ -287,4 +290,14 @@ INSERT INTO schema_migrations (version) VALUES ('20131021224642');
 INSERT INTO schema_migrations (version) VALUES ('20140204233100');
 
 INSERT INTO schema_migrations (version) VALUES ('20140204233952');
+
+INSERT INTO schema_migrations (version) VALUES ('20150221183354');
+
+INSERT INTO schema_migrations (version) VALUES ('20150221202006');
+
+INSERT INTO schema_migrations (version) VALUES ('20150222003411');
+
+INSERT INTO schema_migrations (version) VALUES ('20150222003435');
+
+INSERT INTO schema_migrations (version) VALUES ('20150222003448');
 

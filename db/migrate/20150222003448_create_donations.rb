@@ -8,7 +8,6 @@ class CreateDonations < ActiveRecord::Migration
       t.timestamps null: false
       t.datetime :deleted_at
     end
-    change_column :donations, :amount_needed_cents, :bigint, limit: 8
     add_index :donations, :user_id
     add_index :donations, :campaign_id
   end

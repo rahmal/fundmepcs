@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 
   validates :email, presence: {message: "Please enter your email address"},
               length: 3..255,
-              format: {with: /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, message: "Please enter a valid email" }
+              format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "Please enter a valid email" }
 
   validates :bio, length: 3..160, allow_blank: true
   validates :gender, inclusion: { in: %W(m f) }, allow_blank: true

@@ -9,8 +9,6 @@ class CreateCampaigns < ActiveRecord::Migration
       t.timestamps null: false
       t.datetime :deleted_at
     end
-    change_column :campaigns, :amount_needed_cents, :bigint, limit: 8
-    change_column :campaigns, :amount_raised_cents, :bigint, limit: 8
     add_index :campaigns, :user_id
     add_index :campaigns, :product_id
   end

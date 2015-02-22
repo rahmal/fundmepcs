@@ -50,17 +50,8 @@ class CreateUsers < ActiveRecord::Migration
       t.datetime :deleted_at
     end
 
-    reversible do |dir|
-      dir.up do
-        execute 'CREATE UNIQUE INDEX index_users_on_lower_email_index ON users (lower(email))'
-      end
-      dir.down do
-        remove_index :users, :index_users_on_lower_email_index
-      end
-    end
-
-    add_index :users, :email
-    add_index :users, :username
+    add_index :users, :email, unique: true
+    add_index :users, :username, unique: true
     add_index :users, :deleted_at
  
     add_index :users, :reset_password_token, unique: true

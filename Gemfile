@@ -26,6 +26,8 @@ gem 'airbrake', '~> 3.2.1'         # use with airbrake.io or errbit
 gem 'mysql2'
 gem 'dalli'                     # memcached
 gem 'hashie'
+gem 'paranoia', '~> 2.0'
+gem 'money-rails'
 # gem 'pg'
 # gem 'schema_plus'             # add better index and foreign key support
 # gem 'jbuilder'

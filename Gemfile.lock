@@ -41,6 +41,10 @@ GEM
     airbrake (3.2.1)
       builder
       multi_json
+    amazon_flex_pay (0.10.0)
+      activesupport (>= 3.0.14)
+      multi_xml (>= 0.5.2)
+      rest-client (~> 1.6.1)
     arel (6.0.0)
     autoprefixer-rails (5.1.7)
       execjs
@@ -179,6 +183,15 @@ GEM
     mini_magick (4.1.0)
     mini_portile (0.6.2)
     minitest (5.5.1)
+    monetize (1.1.0)
+      money (~> 6.5.0)
+    money (6.5.1)
+      i18n (>= 0.6.4, <= 0.7.0)
+    money-rails (1.3.0)
+      activesupport (>= 3.0)
+      monetize (~> 1.1.0)
+      money (~> 6.5.0)
+      railties (>= 3.0)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -216,6 +229,8 @@ GEM
       multi_json (~> 1.3)
       omniauth-oauth (~> 1.0)
     orm_adapter (0.5.0)
+    paranoia (2.1.0)
+      activerecord (~> 4.0)
     premailer (1.8.3)
       css_parser (>= 1.3.6)
       htmlentities (>= 4.0.0, <= 4.3.1)
@@ -301,6 +316,8 @@ GEM
     remotipart (1.2.1)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec (3.2.0)
       rspec-core (~> 3.2.0)
       rspec-expectations (~> 3.2.0)
@@ -401,6 +418,7 @@ DEPENDENCIES
   acts_as_follower
   addressable
   airbrake (~> 3.2.1)
+  amazon_flex_pay
   awesome_print
   better_errors
   binding_of_caller
@@ -421,17 +439,20 @@ DEPENDENCIES
   headjs-rails
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   json (~> 1.7.7)
   letter_opener
   memcachier
   mini_magick
   minitest
+  money-rails
   mysql2
   newrelic_rpm
   nprogress-rails
   omniauth
   omniauth-facebook
   omniauth-twitter
+  paranoia (~> 2.0)
   premailer-rails
   pry
   pry-byebug

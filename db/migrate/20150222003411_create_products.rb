@@ -4,7 +4,6 @@ class CreateProducts < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :brand
-      t.string 
       t.string :series
       t.string :model
       t.string :os
@@ -22,6 +21,5 @@ class CreateProducts < ActiveRecord::Migration
       t.timestamps null: false
       t.datetime :deleted_at
     end
-    change_column :products, :cost_cents, :bigint, limit: 8
   end
 end
