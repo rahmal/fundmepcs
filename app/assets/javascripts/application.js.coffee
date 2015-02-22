@@ -12,9 +12,13 @@
 #
 #= require jquery_2
 #= require jquery_ujs
+#= require jquery.ui.all
 #= require bootstrap
 #= require jquery.turbolinks
 #= require turbolinks
+#= require jquery.details
+#= require jquery.textchange
+#= require preorder
 #= require nprogress
 #= require nprogress-turbolinks
 #= require rails_confirm_dialog

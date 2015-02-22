@@ -39,6 +39,8 @@ gem 'headjs-rails'
 
 # Javascript
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+
 gem 'turbolinks'
 gem 'jquery-turbolinks'
 gem 'nprogress-rails'
@@ -79,6 +81,9 @@ gem 'rails_admin'
 gem 'sidekiq'
 gem 'devise-async'
 gem 'sinatra', require: false
+
+# Kickstarter's awesome Amazon Flexible Payments gem
+gem 'amazon_flex_pay'
 
 # Utils
 gem 'addressable'
