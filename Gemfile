@@ -76,6 +76,7 @@ gem 'omniauth-twitter'
 # Images
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'fog'
 
 # Admin
 gem 'rails_admin'
