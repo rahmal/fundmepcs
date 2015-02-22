@@ -79,6 +79,7 @@ CREATE TABLE campaigns (
     title character varying,
     amount_needed_cents integer DEFAULT 0 NOT NULL,
     amount_raised_cents integer DEFAULT 0 NOT NULL,
+    token character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted_at timestamp without time zone
@@ -483,6 +484,13 @@ CREATE INDEX index_authentications_on_provider ON authentications USING btree (p
 --
 
 CREATE INDEX index_campaigns_on_product_id ON campaigns USING btree (product_id);
+
+
+--
+-- Name: index_campaigns_on_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_campaigns_on_token ON campaigns USING btree (token);
 
 
 --
