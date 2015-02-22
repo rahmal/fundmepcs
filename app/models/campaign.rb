@@ -1,3 +1,5 @@
+require 'random_string'
+
 class Campaign < ActiveRecord::Base
   include RandomString
 
