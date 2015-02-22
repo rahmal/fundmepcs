@@ -29,6 +29,8 @@ log/*.log
 tmp
 
 # Ignore RubyMine files
+.idea
+.idea/*
 *.iws
 *.ipr
 *.imla
