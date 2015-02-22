@@ -14,6 +14,7 @@
 #= require jquery_ujs
 #= require jquery-ui
 #= require bootstrap
+#= require modernizr
 #= require jquery.turbolinks
 #= require turbolinks
 #= require jquery.details

@@ -1,0 +1,40 @@
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Navigation & Logo-->
+<div class="mainmenu-wrapper">
+  <div class="container">
+    <div class="menuextras">
+      <div class="extras">
+        <ul>
+          <% if user_signed_in? %>
+            <li>
+              <div class="dropdown choose-country">
+                <a class="#" data-toggle="dropdown" href="#">
+                  <%= avatar(current_user) %> <%= current_user.name %>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li role="menuitem"><a href="#">Profile</a></li>
+                  <li role="menuitem"><a href="#">Settings</a></li>
+                </ul>
+              </div>
+            </li>
+            <li><%= link_to t('auth.logout.link'), destroy_user_session_path, rel: :nofollow %></li>
+          <% else %>
+            <li><%= link_to t('auth.signup.link'), new_user_registration_path %></li>
+            <li><%= link_to t('auth.login.link'), new_user_session_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <nav id="mainmenu" class="mainmenu">
+      <ul>
+        <li class="logo-wrapper"> <img src="/assets/fundmePC-logo.png" style="top:-15px; position: relative"> <h1 style="display: inline"> FundMe PC</h1> </li>
+        <li><a href="/users/donate">Donate</a></li>
+        <li><a href="/users/request">Request</a></li>
+        <li><a href="/about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
