@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # Devise, require authenticate by default
-  before_filter :authenticate_user!
+  # before_filter :authenticate_user!
 
   # CanCan, check authorization unless authorizing with devise
   check_authorization unless: :skip_check_authorization?

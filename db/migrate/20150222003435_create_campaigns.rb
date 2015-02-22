@@ -6,10 +6,12 @@ class CreateCampaigns < ActiveRecord::Migration
       t.string :title
       t.integer :amount_needed_cents, default: 0, null: false
       t.integer :amount_raised_cents, default: 0, null: false
+      t.string :token
       t.timestamps null: false
       t.datetime :deleted_at
     end
     add_index :campaigns, :user_id
     add_index :campaigns, :product_id
+    add_index :campaigns, :token, unique: true
   end
 end

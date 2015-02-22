@@ -38,6 +38,15 @@ Rails.application.routes.draw do
   end
   get '/home' => 'users#show', as: 'user_home'
 
+  # Products
+   resources :products, only: [:show, :index]
+
+  # Campaigns
+  resources :campaigns, only: [:new, :create, :show, :index]
+
+  # Donations
+  resources :donations, only: [:new, :create]
+
   # Dummy preview pages for testing.
   get '/p/test' => 'pages#test', as: 'test'
   get '/p/email' => 'pages#email' if ENV['ALLOW_EMAIL_PREVIEW'].present?

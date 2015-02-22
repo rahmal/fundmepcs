@@ -2,10 +2,10 @@ common: &common
   adapter: postgresql
   encoding: unicode
   pool: 5
-  host: ec2-23-21-219-209.compute-1.amazonaws.com
-  database: dfb4k5vu5fumc3
-  username: huvionhigzqkun
-  password: _b6Dj2JU8YZUJbDg9z680e8fEq
+  host: ec2-23-23-80-55.compute-1.amazonaws.com
+  database: dchgkis110gnm7
+  username: vcmejdqfieqwyt
+  password: u-yj8CEPbWSSDCDVBDlZECnZNP
 
 development:
   <<: *common
