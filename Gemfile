@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.1.5'
+ruby '2.2.0'
 
 gem 'rails', '~> 4.2.0'
-gem 'json',  '~> 1.7.7'
+gem 'json',  '~> 1.8.2'
 
 # PLATFORM SPECIFIC
 #
@@ -23,6 +23,7 @@ gem 'airbrake', '~> 3.2.1'         # use with airbrake.io or errbit
 # gem 'rack-google-analytics'
 
 # Data
+gem 'pg'
 gem 'mysql2'
 gem 'dalli'                     # memcached
 gem 'hashie'
@@ -91,6 +92,7 @@ gem 'amazon_flex_pay'
 gem 'addressable'
 gem 'settingslogic'
 gem 'acts_as_follower'
+gem 'rconfig', require: 'rconfig'
 
 group :development do
   # Docs

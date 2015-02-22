@@ -1,11 +1,12 @@
 common: &common
-  adapter: mysql2
-  encoding: utf8
+  adapter: postgresql
+  encoding: unicode
+#  adapter: mysql2
+#  encoding: utf8
   pool: 5
   host: localhost
-  username: root
-  username: root
-  password:
+  username: fundme
+  password: funds!
 
 development:
   <<: *common
