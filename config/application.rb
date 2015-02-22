@@ -53,7 +53,7 @@ module StarterKit
       bootstrap/bootstrap bootstrap/bootstrap-theme
       jquery jquery.fitvids jquery.sequence jquery.bxslider main-menu template
     ]
-    config.serve_static_assets = true
+    config.serve_static_files = true
 
     config.to_prepare do
       Devise::Mailer.layout Rails.application.config.settings.mail.layout
