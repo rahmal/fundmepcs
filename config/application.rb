@@ -48,8 +48,12 @@ module StarterKit
 
     # Serve vendor fonts
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
-
-    config.assets.precompile += %w( head )
+    config.assets.precompile += %w[
+      icomoon-social main leaflet leaflet.ie
+      bootstrap/bootstrap bootstrap/bootstrap-theme
+      jquery jquery.fitvids jquery.sequence jquery.bxslider main-menu template
+    ]
+    config.serve_static_assets = true
 
     config.to_prepare do
       Devise::Mailer.layout Rails.application.config.settings.mail.layout

@@ -93,7 +93,7 @@ gem 'addressable'
 gem 'settingslogic'
 gem 'acts_as_follower'
 gem 'rconfig', require: 'rconfig'
-
+gem 'rails_serve_static_assets'
 group :development do
   # Docs
   gem 'sdoc', require: false    # bundle exec rake doc:rails

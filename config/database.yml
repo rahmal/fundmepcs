@@ -1,26 +1,21 @@
 common: &common
   adapter: postgresql
   encoding: unicode
-#  adapter: mysql2
-#  encoding: utf8
   pool: 5
-  host: localhost
-  username: fundme
-  password: funds!
+  host: ec2-23-21-219-209.compute-1.amazonaws.com
+  database: dfb4k5vu5fumc3
+  username: huvionhigzqkun
+  password: _b6Dj2JU8YZUJbDg9z680e8fEq
 
 development:
   <<: *common
-  database: fundme-dev
-
-profile:
-  <<: *common
-  database: grh-dev
 
 test:
   <<: *common
+  host: localhost
   database: fundme-test
+  username: fundme
+  password: funds!
 
 production:
   <<: *common
-  database: fundme
-  socket: /var/run/mysqld/mysqld.sock
